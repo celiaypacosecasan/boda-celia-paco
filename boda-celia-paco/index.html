@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Celia & Paco · 25 Septiembre 2027</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+
+    :root {
+      --cream: #f7f3ef;
+      --gold: #c6a77d;
+      --rose: #c7a1a7;
+      --text: #5f5052;
+      --white: #ffffff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    h1,h2,h3,h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+    }
+
+    section {
+      padding: 120px 24px;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.35));
+      z-index: 1;
+    }
+
+    .hero video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      max-width: 900px;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(4rem, 10vw, 8rem);
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .glass {
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 30px;
+      padding: 50px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(3rem, 6vw, 5rem);
+      margin-bottom: 60px;
+      color: var(--rose);
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .count-card {
+      background: white;
+      border-radius: 30px;
+      padding: 50px 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .count-number {
+      font-size: 5rem;
+      color: var(--gold);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .count-label {
+      margin-top: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 50px;
+      align-items: center;
+    }
+
+    .story img {
+      width: 100%;
+      border-radius: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .story-text {
+      font-size: 1.1rem;
+      line-height: 2;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 30px;
+    }
+
+    .timeline-card {
+      background: white;
+      padding: 40px;
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .timeline-time {
+      color: var(--gold);
+      font-size: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      background: white;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .card {
+      background: white;
+      border-radius: 40px;
+      padding: 50px;
+      box-shadow: var(--shadow);
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: none;
+      background: #f8f4f1;
+      border-radius: 18px;
+      padding: 18px;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    button {
+      background: var(--rose);
+      color: white;
+      border: none;
+      padding: 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      opacity: 0.95;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 500px;
+      border: 0;
+      border-radius: 30px;
+      margin-top: 30px;
+    }
+
+    footer {
+      padding: 80px 20px;
+      text-align: center;
+      background: white;
+    }
+
+    footer h3 {
+      font-size: 3rem;
+      color: var(--rose);
+      margin-bottom: 20px;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(80px);
+    }
+
+    .music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    @media(max-width:768px) {
+
+      section {
+        padding: 90px 20px;
+      }
+
+      .card {
+        padding: 30px;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+      }
+
+      .count-number {
+        font-size: 3rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <audio id="bgMusic" loop>
+    <source src="assets/music/viva-suecia.mp3" type="audio/mp3">
+  </audio>
+
+  <div class="music-btn" id="musicBtn">
+    ♫
+  </div>
+
+  <section class="hero">
+
+    <video autoplay muted loop playsinline>
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-content fade-up">
+      <div class="glass">
+        <p>25 Septiembre 2027</p>
+        <h1>Celia & Paco</h1>
+        <p>Nos casamos</p>
+      </div>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="container">
+
+      <h2 class="section-title fade-up">Cuenta Atrás</h2>
+
+      <div class="countdown fade-up">
+
+        <div class="count-card">
+          <div class="count-number" id="days">0</div>
+          <div class="count-label">Días</div>
+        </div>
+
+        <div class="count-card">
+          <div class="count-number" id="hours">0</div>
+          <div class="count-label">Horas</div>
+        </div>
+
+        <div class="count-card">
+          <div class="count-number" id="minutes">0</div>
+          <div class="count-label">Minutos</div>
+        </div>
+
+        <div class="count-card">
+          <div class="count-number" id="seconds">0</div>
+          <div class="count-label">Segundos</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="container story">
+
+      <div class="fade-up">
+        <img src="assets/img/foto1.jpg" alt="Celia y Paco">
+      </div>
+
+      <div class="story-text fade-up">
+
+        <h2 class="section-title" style="text-align:left;margin-bottom:30px;">
+          Nuestra Historia
+        </h2>
+
+        <p>
+          Después de miles de momentos inolvidables, viajes, risas y sueños compartidos,
+          queremos celebrar el día más importante de nuestra vida junto a vosotros.
+        </p>
+
+        <br>
+
+        <p>
+          Gracias por acompañarnos en esta aventura.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section style="background:white;">
+    <div class="container">
+
+      <h2 class="section-title fade-up">El Gran Día</h2>
+
+      <div class="timeline">
+
+        <div class="timeline-card fade-up">
+          <div>
+            <h3>Ceremonia</h3>
+            <p>Lavadero de Lanas · Mérida</p>
+          </div>
+          <div class="timeline-time">14:00h</div>
+        </div>
+
+        <div class="timeline-card fade-up">
+          <div>
+            <h3>Cóctel</h3>
+            <p>Jardines exteriores</p>
+          </div>
+          <div class="timeline-time">16:00h</div>
+        </div>
+
+        <div class="timeline-card fade-up">
+          <div>
+            <h3>Fiesta</h3>
+            <p>Baile · Música · Mojitos</p>
+          </div>
+          <div class="timeline-time">21:00h</div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+
+      <h2 class="section-title fade-up">Galería Compartida</h2>
+
+      <div class="card fade-up">
+
+        <input type="file" id="photoUpload" multiple accept="image/*">
+
+        <br><br>
+
+        <button onclick="uploadPhotos()">
+          Subir Fotos
+        </button>
+
+      </div>
+
+      <br><br>
+
+      <div class="gallery-grid" id="gallery"></div>
+
+    </div>
+  </section>
+
+  <section style="background:white;">
+    <div class="container map">
+
+      <div class="card fade-up">
+
+        <h2 class="section-title">Celebración</h2>
+
+        <p style="text-align:center;font-size:1.1rem;line-height:2;">
+          Estamos deseando compartir este día tan especial con vosotros.
+        </p>
+
+        <iframe src="https://maps.google.com/maps?q=lavadero%20de%20lanas%20merida&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+
+      <div class="card fade-up">
+
+        <h2 class="section-title">Confirmación de Asistencia</h2>
+
+        <form id="rsvpForm">
+
+          <input type="text" name="name" placeholder="Nombre y apellidos" required>
+
+          <select name="attending">
+            <option value="Sí">Sí asistiré</option>
+            <option value="No">No podré asistir</option>
+          </select>
+
+          <input type="number" name="adults" placeholder="Número de adultos">
+
+          <input type="number" name="children" placeholder="Número de niños">
+
+          <textarea name="allergies" rows="5" placeholder="Alergias o intolerancias"></textarea>
+
+          <button type="submit">
+            Confirmar asistencia
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section style="background:white;">
+    <div class="container">
+
+      <div class="card fade-up" style="text-align:center;">
+
+        <h2 class="section-title">Regalo de boda</h2>
+
+        <p style="font-size:1.1rem;line-height:2;max-width:700px;margin:auto;">
+          El mejor regalo es compartir este día tan especial con vosotros.
+          Pero si estabais pensando en regalarnos otro juego de sábanas...
+          mejor ayudadnos a pagar los mojitos del viaje 🍸
+        </p>
+
+        <br><br>
+
+        <h3 style="font-size:2rem;color:var(--gold);">
+          ES7601822731430201553519
+        </h3>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+
+    <h3>Celia & Paco</h3>
+
+    <p>25 Septiembre 2027</p>
+
+    <br>
+
+    <p>📞 600 805 419 · 656 938 117</p>
+
+    <br>
+
+    <p>✉️ celiaypacosecasan@gmail.com</p>
+
+  </footer>
+
+  <script type="module">
+
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
+
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      onSnapshot,
+      query,
+      orderBy,
+      serverTimestamp
+    } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+
+    import {
+      getStorage,
+      ref,
+      uploadBytes,
+      getDownloadURL
+    } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js';
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyDKuBCuZYhVpTRQuGDSWAt1ry0XUozB3dA",
+  authDomain: "boda-celia-paco.firebaseapp.com",
+  projectId: "boda-celia-paco",
+  storageBucket: "boda-celia-paco.firebasestorage.app",
+  messagingSenderId: "487932646953",
+  appId: "1:487932646953:web:d7a262bb2a69f2f9fc2e38",
+  measurementId: "G-9TX4LJNXDX"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    window.uploadPhotos = async function() {
+
+      const files = document.getElementById('photoUpload').files;
+
+      if(files.length === 0) {
+        alert('Selecciona fotos');
+        return;
+      }
+
+      for(const file of files) {
+
+        const storageRef = ref(storage, `wedding/${Date.now()}-${file.name}`);
+
+        await uploadBytes(storageRef, file);
+
+        const imageUrl = await getDownloadURL(storageRef);
+
+        await addDoc(collection(db, 'photos'), {
+          imageUrl,
+          createdAt: serverTimestamp()
+        });
+      }
+
+      alert('Fotos subidas correctamente ❤️');
+    }
+
+    const gallery = document.getElementById('gallery');
+
+    const q = query(collection(db, 'photos'), orderBy('createdAt', 'desc'));
+
+    onSnapshot(q, snapshot => {
+
+      gallery.innerHTML = '';
+
+      snapshot.forEach(doc => {
+
+        const data = doc.data();
+
+        const card = document.createElement('div');
+        card.className = 'gallery-card fade-up';
+
+        card.innerHTML = `
+          <img src="${data.imageUrl}" alt="Foto boda">
+        `;
+
+        gallery.appendChild(card);
+      });
+    });
+
+    const form = document.getElementById('rsvpForm');
+
+    form.addEventListener('submit', async e => {
+
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      await addDoc(collection(db, 'guests'), {
+        name: formData.get('name'),
+        attending: formData.get('attending'),
+        adults: formData.get('adults'),
+        children: formData.get('children'),
+        allergies: formData.get('allergies'),
+        createdAt: serverTimestamp()
+      });
+
+      alert('Confirmación enviada ❤️');
+
+      form.reset();
+    });
+
+  </script>
+
+  <script>
+
+    const weddingDate = new Date('2027-09-25T14:00:00').getTime();
+
+    const timer = setInterval(() => {
+
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if(distance < 0) {
+        clearInterval(timer);
+        return;
+      }
+
+      document.getElementById('days').innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+      document.getElementById('hours').innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+      document.getElementById('minutes').innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+      document.getElementById('seconds').innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+
+    }, 1000);
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.fade-up').forEach(element => {
+
+      gsap.to(element, {
+        opacity: 1,
+        y: 0,
+        duration: 1.4,
+        ease: 'power4.out',
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 85%'
+        }
+      });
+    });
+
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+
+    let playing = false;
+
+    musicBtn.addEventListener('click', () => {
+
+      if(!playing) {
+        music.play();
+        playing = true;
+      } else {
+        music.pause();
+        playing = false;
+      }
+    });
+
+  </script>
+
+</body>
+</html>
